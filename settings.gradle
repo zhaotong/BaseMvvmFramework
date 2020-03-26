@@ -1,0 +1,5 @@
+include ':libcommon'
+include ':libbase'
+include ':libthird'
+include ':app'
+rootProject.name = "BaseMvvmFramework"
