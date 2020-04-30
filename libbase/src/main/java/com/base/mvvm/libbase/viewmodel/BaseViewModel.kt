@@ -2,15 +2,19 @@ package com.base.mvvm.libbase.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.base.mvvm.libbase.model.BaseModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-abstract class BaseViewModel<M : BaseModel>(application: Application) :
-    AndroidViewModel(application) {
+open class BaseViewModel(application: Application) : AndroidViewModel(application) {
 
-    var model: BaseModel? = null
 
-    public fun loadData(url: String, params: Map<String, Any>) {
-        model?.loadData(url,params)
+    suspend fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {
+        withContext(Dispatchers.Main) { block() }
+    }
+
+    suspend fun launchOnIO(block: suspend CoroutineScope.() -> Unit) {
+        withContext(Dispatchers.IO) { block() }
     }
 
 }
