@@ -14,7 +14,5 @@ open class BaseHolder<T : ListItem>(itemView: View) :
 
     }
 
-    fun showImage(){
 
-    }
 }
